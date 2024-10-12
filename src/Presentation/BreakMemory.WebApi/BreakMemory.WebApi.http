@@ -1,0 +1,6 @@
+@BreakMemory.WebApi_HostAddress = http://localhost:5154
+
+GET {{BreakMemory.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
