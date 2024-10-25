@@ -1,4 +1,4 @@
-namespace BreakMemory.WebApi.Models;
+namespace BreakMemory.Domain.Models.Database;
 
 public class MongoDBSettings
 {
