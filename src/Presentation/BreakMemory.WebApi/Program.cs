@@ -3,6 +3,7 @@ using FastEndpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager appConfiguration = builder.Configuration;
+builder.Services.AddFastEndpoints();
 
 builder.Services.AddApplication(appConfiguration);
 
