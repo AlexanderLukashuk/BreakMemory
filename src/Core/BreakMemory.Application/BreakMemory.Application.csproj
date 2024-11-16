@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BreakMemory.Domain\BreakMemory.Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\BreakMemory.Infrastructure\BreakMemory.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
