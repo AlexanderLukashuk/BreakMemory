@@ -1,9 +1,11 @@
 using BreakMemory.Application;
 using FastEndpoints;
+using FastEndpoints.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager appConfiguration = builder.Configuration;
 builder.Services.AddFastEndpoints();
+builder.Services.SwaggerDocument();
 
 builder.Services.AddApplication(appConfiguration);
 
