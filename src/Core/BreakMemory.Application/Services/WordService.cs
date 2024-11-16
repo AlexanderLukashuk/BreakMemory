@@ -13,7 +13,7 @@ public class WordService
     {
         var mongoClient = new MongoClient(wordServiceDdSettings.Value.ConnectionString);
         var mongoDatabase = mongoClient.GetDatabase(wordServiceDdSettings.Value.DatabaseName);
-        wordServiceDdSettings = mongoDatabase.GetCollection<Word>(wordServiceDdSettings.Value.CollectionName);
+        wordCollection = mongoDatabase.GetCollection<Word>(wordServiceDdSettings.Value.CollectionName);
     }
 
     public async Task<List<Word>> GetAllEntries() =>
@@ -24,10 +24,22 @@ public class WordService
 
     public async Task CreateEntry(Word newWord) =>
         await wordCollection.InsertOneAsync(newWord);
-    
+
     public async Task UpdateEntry(Guid id, Word updatedWord) =>
         await wordCollection.ReplaceOneAsync(x => x.Id == id, updatedWord);
 
     public async Task RemoveEntry(Guid id) =>
         await wordCollection.DeleteOneAsync(x => x.Id == id);
+
+    public async Task<Word?> GetRandomWord()
+    {
+        var random = new Random();
+        var count = await wordCollection.CountDocumentsAsync(_ => true);
+        var skip = random.Next(0, (int)count);
+
+        return await wordCollection.Find(_ => true)
+                                    .Skip(skip)
+                                    .Limit(1)
+                                    .FirstOrDefaultAsync();
+    }
 }
